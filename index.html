@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/style.css">
+    <title>Weather Forecaster</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <header class="d-flex justify-content-center">
+            <h1>Weather Dashboard</h1>
+        </header>
+        <div class="row">
+            <div class="col-md-3">
+                <!-- form with search input and submit button -->
+                <form>
+                    <div id="form" class="form-group">
+                        <label for="searchInput"><strong>Search for a City:</strong></label>
+                        <input type="text" class="form-control" id="searchInput" placeholder="San Diego">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block mb-2">Search</button>
+                </form>
+                <hr>
+                <!-- search history buttons -->
+                <div id="history-buttons">
+                    <button type="button" class="btn btn-outline-secondary btn-block">San Diego</button>
+                    <button type="button" class="btn btn-outline-secondary btn-block">New York</button>
+                    <button type="button" class="btn btn-outline-secondary btn-block">SLO</button>
+                </div>
+            </div>
+            <!-- this will contain the weather forecasts -->
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="card col-12 col-md-12 d-flex flex-column p-2 mt-3 mb-3">
+                        <div class="card-header">
+                            <h3>TODAY'S WEATHER:</h3>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Temp:</li>
+                            <li class="list-group-item">Wind:</li>
+                            <li class="list-group-item">Humidity:</li>
+                            <li class="list-group-item">UV Index:</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <h4>5-Day Forecast:</h4>
+                </div>
+                <div class="row">
+                    <div class="card col-12 col-md-2 d-flex flex-column p-2 m-3" style="width: 18rem;">
+                        <div class="card-header">
+                            Day 1:
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Temp:</li>
+                            <li class="list-group-item">Wind:</li>
+                            <li class="list-group-item">Humidity:</li>
+                        </ul>
+                    </div>
+                    <div class="card col-12 col-md-2 d-flex flex-column p-2 m-3" style="width: 18rem;">
+                        <div class="card-header">
+                            Day 2:
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Temp:</li>
+                            <li class="list-group-item">Wind:</li>
+                            <li class="list-group-item">Humidity:</li>
+                        </ul>
+                    </div>
+                    <div class="card col-12 col-md-2 d-flex flex-column p-2 m-3" style="width: 18rem;">
+                        <div class="card-header">
+                            Day 3:
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Temp:</li>
+                            <li class="list-group-item">Wind:</li>
+                            <li class="list-group-item">Humidity:</li>
+                        </ul>
+                    </div>
+                    <div class="card col-12 col-md-2 d-flex flex-column p-2 m-3" style="width: 18rem;">
+                        <div class="card-header">
+                            Day 4:
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Temp:</li>
+                            <li class="list-group-item">Wind:</li>
+                            <li class="list-group-item">Humidity:</li>
+                        </ul>
+                    </div>
+                    <div class="card col-12 col-md-2 d-flex flex-column p-2 m-3" style="width: 18rem;">
+                        <div class="card-header">
+                            Day 5:
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Temp:</li>
+                            <li class="list-group-item">Wind:</li>
+                            <li class="list-group-item">Humidity:</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+        crossorigin="anonymous"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
