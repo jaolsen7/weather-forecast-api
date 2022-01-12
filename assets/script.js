@@ -1,10 +1,10 @@
 //var apiKey = "e1a281f8f89d93ca28dcded0f11ad7e1";
 
 var weatherContainer = document.querySelector("#weather-container");
-console.log(weatherContainer);
 
 var predictionContainer = document.querySelectorAll("#prediction-container");
-console.log(predictionContainer);
+
+var currentHeader = document.getElementById("current-header");
 
 function getWeather(lat, lon) {
 
@@ -17,9 +17,43 @@ function getWeather(lat, lon) {
             return response.json();
         })
         .then(function (data) {
-            console.log(data.daily);
-            console.log(data.current.weather[0].icon);
-            console.log(data.current.weather[0].description);
+
+                var unix = data.current.dt;
+                var date = new Date(unix * 1000);
+                var dateObject = "( " + date.toLocaleString() + " )";
+                currentHeader.append(dateObject);
+
+                var tempLi = document.createElement("li");
+                var temp = "Temp: " + data.current.temp + " ºF";
+                tempLi.append(temp);
+                tempLi.setAttribute("class", "list-group-item");
+                currentHeader.append(tempLi);
+
+                // for (var i = 0; i < data.daily.length - 2; i++) {
+                //     var  predTempLi = document.createElement("li");
+                //     var predTemp = data.daily[i].temp
+                //     predTempLi.setAttribute("class", "list-group-item");
+                //     predTempLi.append(predTemp);
+                //     predictionContainer[i].append(predTempLi);
+                // }
+
+                var windLi = document.createElement("li");
+                var wind = "Wind: " + data.current.wind_speed + " mph";
+                windLi.append(wind);
+                windLi.setAttribute("class", "list-group-item");
+                currentHeader.append(windLi);
+
+                var humidityLi = document.createElement("li");
+                var humidity = "Humidity: " + data.current.humidity + " %";
+                humidityLi.append(humidity);
+                humidityLi.setAttribute("class", "list-group-item");
+                currentHeader.append(humidityLi);
+
+                var uviLi = document.createElement("li");
+                var uvi = "UVI: " + data.current.uvi;
+                uviLi.append(uvi);
+                uviLi.setAttribute("class", "list-group-item");
+                currentHeader.append(uviLi);
 
                 var icon = document.createElement("img");
                 var iconUrl = "https://openweathermap.org/img/wn/" + data.current.weather[0].icon + "@2x.png"
@@ -47,13 +81,28 @@ function getCoords(search) {
             return response.json();
         })
         .then(function (data) {
-            console.log(data[0].lat);
             getWeather(data[0].lat, data[0].lon);
         });
 };
+
+var historyBtns = document.getElementById("history-buttons");
 
 $("#search").click(function (event) {
     var searchInput = $("input").val();
     event.preventDefault();
     getCoords(searchInput);
+
+    var titleLi = document.createElement("h3");
+    var title = searchInput + "'s Current Weather";
+    titleLi.append(title);
+    currentHeader.append(titleLi);
+    
+    localStorage.setItem("search", searchInput);
 })
+
+var searched = localStorage.getItem("search");
+console.log(searched);
+// for (var i = 0; i < searched.length; i++) {
+//     var historyBtn = document.createElement("button");
+//     var buttontitle = searched.val().trim
+// }
