@@ -2,9 +2,11 @@
 
 var weatherContainer = document.querySelector("#weather-container");
 
-var predictionContainer = document.querySelectorAll("#prediction-container");
+var predictionContainer = document.querySelectorAll(".prediction-container");
 
 var currentHeader = document.getElementById("current-header");
+
+var predictionHeader = document.querySelectorAll(".prediction-header");
 
 function getWeather(lat, lon) {
 
@@ -17,6 +19,7 @@ function getWeather(lat, lon) {
             return response.json();
         })
         .then(function (data) {
+                console.log(data.daily[0]);
 
                 var unix = data.current.dt;
                 var date = new Date(unix * 1000);
@@ -28,14 +31,6 @@ function getWeather(lat, lon) {
                 tempLi.append(temp);
                 tempLi.setAttribute("class", "list-group-item");
                 currentHeader.append(tempLi);
-
-                // for (var i = 0; i < data.daily.length - 2; i++) {
-                //     var  predTempLi = document.createElement("li");
-                //     var predTemp = data.daily[i].temp
-                //     predTempLi.setAttribute("class", "list-group-item");
-                //     predTempLi.append(predTemp);
-                //     predictionContainer[i].append(predTempLi);
-                // }
 
                 var windLi = document.createElement("li");
                 var wind = "Wind: " + data.current.wind_speed + " mph";
@@ -61,12 +56,37 @@ function getWeather(lat, lon) {
                 icon.setAttribute("alt", data.current.weather[0].description);
                 weatherContainer.append(icon);
 
-                for (var i = 0; i < data.daily.length - 2; i++) {
+                for (var i = 0; i < 5; i++) {
+
+                    var predUnix = data.daily[i].dt
+                    var predDate = new Date(predUnix * 1000);
+                    var dateObject = predDate.toLocaleString().split(",")[0];
+                    console.log(dateObject);
+                    predictionHeader[i].append(dateObject);
+
                     var pic = document.createElement("img");
                     var picUrl = "https://openweathermap.org/img/wn/" + data.daily[i].weather[0].icon + "@2x.png"
                     pic.setAttribute("src", picUrl);
                     pic.setAttribute("alt", data.daily[i].weather[0].description);
                     predictionContainer[i].append(pic);
+
+                    var  predTempLi = document.createElement("li");
+                    var predTemp = "Temp: " + data.daily[i].temp.day + " ºF";
+                    predTempLi.setAttribute("class", "list-group-item");
+                    predTempLi.append(predTemp);
+                    predictionContainer[i].appendChild(predTempLi);
+
+                    var  predWindLi = document.createElement("li");
+                    var predWind = "Wind: " + data.daily[i].wind_speed + " mph";
+                    predWindLi.setAttribute("class", "list-group-item");
+                    predWindLi.append(predWind);
+                    predictionContainer[i].appendChild(predWindLi);
+
+                    var  predHumidityLi = document.createElement("li");
+                    var predHumidity = "Humidity: " + data.daily[i].humidity + " %";
+                    predHumidityLi.setAttribute("class", "list-group-item");
+                    predHumidityLi.append(predHumidity);
+                    predictionContainer[i].appendChild(predHumidityLi);
             }
         });
 };
