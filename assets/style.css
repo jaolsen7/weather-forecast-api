@@ -5,3 +5,8 @@ header {
 #form {
     font-size: 24px;
 }
+#search {
+}
+#weather-container img {
+    background-color: black;
+}
