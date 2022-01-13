@@ -10,6 +10,7 @@ header {
 #weather-container img {
     background-color: black;
 }
-#prediction-container img {
+.prediction-container img {
     background-color: black;
+    margin-left: 30px;
 }

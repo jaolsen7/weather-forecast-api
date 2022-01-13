@@ -19,7 +19,6 @@ function getWeather(lat, lon) {
             return response.json();
         })
         .then(function (data) {
-                console.log(data.daily[0]);
 
                 var unix = data.current.dt;
                 var date = new Date(unix * 1000);
@@ -61,7 +60,6 @@ function getWeather(lat, lon) {
                     var predUnix = data.daily[i].dt
                     var predDate = new Date(predUnix * 1000);
                     var dateObject = predDate.toLocaleString().split(",")[0];
-                    console.log(dateObject);
                     predictionHeader[i].append(dateObject);
 
                     var pic = document.createElement("img");
@@ -105,7 +103,15 @@ function getCoords(search) {
         });
 };
 
+var pastSearches = [];
 var historyBtns = document.getElementById("history-buttons");
+
+historyBtns.addEventListener("click", function(event) {
+    if (event.target.matches("button")) {
+        var query = event.target.textContent;
+        getCoords(query);
+    }
+})
 
 $("#search").click(function (event) {
     var searchInput = $("input").val();
@@ -117,12 +123,29 @@ $("#search").click(function (event) {
     titleLi.append(title);
     currentHeader.append(titleLi);
     
-    localStorage.setItem("search", searchInput);
-})
+    pastSearches.push(searchInput);
+    localStorage.setItem("pastSearches", JSON.stringify(pastSearches));
 
-var searched = localStorage.getItem("search");
-console.log(searched);
-// for (var i = 0; i < searched.length; i++) {
-//     var historyBtn = document.createElement("button");
-//     var buttontitle = searched.val().trim
-// }
+    historyBtns.innerHTML = "";
+
+    for (var i = 0; i < pastSearches.length; i++) {
+        var historyBtn = document.createElement("button");
+        historyBtn.setAttribute("class", "btn btn-outline-secondary btn-block");
+        historyBtn.textContent = pastSearches[i];
+        historyBtns.prepend(historyBtn);
+    }
+});
+
+pastSearches = JSON.parse(localStorage.getItem("pastSearches"));
+if (pastSearches === null ) {
+        pastSearches = [];
+}
+
+    historyBtns.innerHTML = "";
+
+    for (var i = 0; i < pastSearches.length; i++) {
+        var historyBtn = document.createElement("button");
+        historyBtn.setAttribute("class", "btn btn-outline-secondary btn-block");
+        historyBtn.textContent = pastSearches[i];
+        historyBtns.prepend(historyBtn);
+    }
